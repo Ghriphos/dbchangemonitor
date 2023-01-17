@@ -39,7 +39,6 @@ namespace Database
                 Console.WriteLine(entry.Key);
                 Console.WriteLine(string.Join(",", entry.Value));
             }
-
             connection.Close();
         }
     }

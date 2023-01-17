@@ -12,7 +12,7 @@ namespace Database
     {
         public string TableName { get; set; }
         public string[] ColumnName{ get; set; }    
-        public static void PickTableNames()
+        public static void LineCount()
         {
            
         }
