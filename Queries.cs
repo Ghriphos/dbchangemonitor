@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Database;
 
 namespace Database
 {
@@ -20,7 +21,7 @@ namespace Database
 
             SqlDataReader reader = cmd.ExecuteReader();
 
-            Dictionary<string, List<string>> TableColumnMap = new Dictionary<string, List<string>>();
+            Dictionary<string, TableSchema> TableColumnMap = new Dictionary<string, TableSchema>();
             
             while(reader.Read())
             {
@@ -29,15 +30,15 @@ namespace Database
 
                 if (!TableColumnMap.ContainsKey(TableName))
                 {
-                    TableColumnMap.Add(TableName, new List<string>());
+                    TableColumnMap.Add(TableName, new TableSchema(TableName));
                 }
-                List<string> Columns = TableColumnMap[TableName];
-                Columns.Add(ColumnName);
+                TableSchema Schema = TableColumnMap[TableName];
+                Schema.Columns.Add(ColumnName);
             }
-            foreach(KeyValuePair<string, List<string>> entry in TableColumnMap)
+            foreach(KeyValuePair<string, TableSchema> entry in TableColumnMap)
             {
-                Console.WriteLine(entry.Key);
-                Console.WriteLine(string.Join(",", entry.Value));
+                Console.WriteLine(entry.Value.Name);
+                Console.WriteLine(string.Join(",", entry.Value.Columns));
             }
             connection.Close();
         }
