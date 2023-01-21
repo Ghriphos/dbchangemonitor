@@ -11,7 +11,7 @@ namespace Database
 {
     public class Queries
     {
-        public static void fetchTableSchema(Connection database)
+        public static Dictionary<string, TableSchema> fetchTableSchema(Connection database)
         {
             SqlConnection connection = database.CreateConnection();
 
@@ -41,6 +41,8 @@ namespace Database
                 Console.WriteLine(string.Join(",", entry.Value.Columns));
             }
             connection.Close();
+
+            return TableColumnMap;
         }
     }
 }
