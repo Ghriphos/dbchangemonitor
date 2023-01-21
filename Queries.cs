@@ -44,5 +44,22 @@ namespace Database
 
             return TableColumnMap;
         }
+
+        public static void tableRowsCount(){
+            Connection database = new Connection();
+
+            Dictionary<string, TableSchema> TableColumnMap = Queries.fetchTableSchema(database);
+
+            SqlConnection connection = database.CreateConnection();
+            connection.Open();
+
+            foreach(KeyValuePair<string, TableSchema> entry in TableColumnMap){
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from " + entry.Value.Name, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                Console.WriteLine("Numero de linhas da tabela " + entry.Value.Name);
+            }
+            
+        }
     }
 }

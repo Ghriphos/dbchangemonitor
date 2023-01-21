@@ -12,7 +12,7 @@ public class Program
     static void Main()
     {
         Connection database = new Connection();
-        Queries.fetchTableSchema(database);
+        Queries.tableRowsCount();
     }
 }
 
