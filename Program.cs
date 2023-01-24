@@ -12,7 +12,15 @@ public class Program
     static void Main()
     {
         Connection database = new Connection();
-        Queries.tableRowsCount();
+
+        Dictionary<string, TableSchema> schemas = Queries.fetchTableSchema(database);
+        Dictionary<string, int> countPerTable = Queries.tableRowsCount(database, schemas);
+
+        Console.WriteLine("\r\n" + "Contagem de Linhas" + "\r\n");
+
+        foreach(TableSchema schema in schemas.Values){
+            Console.WriteLine(schema.Name + ": " + countPerTable[schema.Name]);
+        }
     }
 }
 

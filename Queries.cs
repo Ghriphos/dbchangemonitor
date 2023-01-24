@@ -45,21 +45,30 @@ namespace Database
             return TableColumnMap;
         }
 
-        public static void tableRowsCount(){
-            Connection database = new Connection();
-
-            Dictionary<string, TableSchema> TableColumnMap = Queries.fetchTableSchema(database);
-
+        public static Dictionary<string, int> tableRowsCount(Connection database, Dictionary<string, TableSchema> schemas){
+            Dictionary<string, int> totalRowsPerTable = new Dictionary<string, int>();
+            
             SqlConnection connection = database.CreateConnection();
-            connection.Open();
+            
 
-            foreach(KeyValuePair<string, TableSchema> entry in TableColumnMap){
-                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from " + entry.Value.Name, connection);
+            foreach(KeyValuePair<string, TableSchema> entry in schemas){
+                connection.Open();
+
+                TableSchema table = entry.Value;
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from " + (string)table.Name, connection);
+                Console.WriteLine(table.Name);
                 SqlDataReader reader = cmd.ExecuteReader();
+                
+                while(reader.Read()){
+                    totalRowsPerTable.Add(table.Name, (int)reader[0]);
+                }
 
-                Console.WriteLine("Numero de linhas da tabela " + entry.Value.Name);
+                connection.Close();
             }
             
+
+            return totalRowsPerTable;
         }
     }
 }
+
