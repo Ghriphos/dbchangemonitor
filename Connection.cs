@@ -15,7 +15,6 @@ namespace Database
             string connectionString = "server=localhost\\SQLEXPRESS08; Database=test;Integrated Security=SSPI;";
             
             SqlConnection sqlConnection = new SqlConnection(connectionString);
-            Console.WriteLine(sqlConnection);
 
             return sqlConnection;
         }

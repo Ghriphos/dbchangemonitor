@@ -35,11 +35,6 @@ namespace Database
                 TableSchema Schema = TableColumnMap[TableName];
                 Schema.Columns.Add(ColumnName);
             }
-            foreach(KeyValuePair<string, TableSchema> entry in TableColumnMap)
-            {
-                Console.WriteLine(entry.Value.Name);
-                Console.WriteLine(string.Join(",", entry.Value.Columns));
-            }
             connection.Close();
 
             return TableColumnMap;
@@ -56,7 +51,6 @@ namespace Database
 
                 TableSchema table = entry.Value;
                 SqlCommand cmd = new SqlCommand("SELECT COUNT(*) from " + (string)table.Name, connection);
-                Console.WriteLine(table.Name);
                 SqlDataReader reader = cmd.ExecuteReader();
                 
                 while(reader.Read()){
