@@ -20,3 +20,4 @@ C:\workspace\dbchangemonitor\obj\Debug\net7.0\refint\dbchangemonitor.dll
 C:\workspace\dbchangemonitor\obj\Debug\net7.0\dbchangemonitor.pdb
 C:\workspace\dbchangemonitor\obj\Debug\net7.0\dbchangemonitor.genruntimeconfig.cache
 C:\workspace\dbchangemonitor\obj\Debug\net7.0\ref\dbchangemonitor.dll
+C:\workspace\dbchangemonitor\bin\Debug\net7.0\CsvHelper.dll

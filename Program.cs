@@ -21,6 +21,9 @@ public class Program
         foreach(TableSchema schema in schemas.Values){
             Console.WriteLine(schema.Name + ": " + countPerTable[schema.Name]);
         }
+        StringBuilder output = Queries.createOutputCSV(countPerTable);
+        String file = @"C:\workspace\dbchangemonitor\outputs\filename.csv";
+        File.AppendAllText(file, output.ToString());
     }
 }
 

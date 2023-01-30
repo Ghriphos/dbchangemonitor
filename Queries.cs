@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Database;
 
+
 namespace Database
 {
     public class Queries
@@ -62,6 +63,19 @@ namespace Database
             
 
             return totalRowsPerTable;
+        }
+
+        public static StringBuilder createOutputCSV(Dictionary<string, int> LineCount){
+            StringBuilder output = new StringBuilder();
+            
+            foreach(KeyValuePair<string, int> entry in LineCount){
+                String tableName = entry.Key;
+                Int128 count = entry.Value;
+                String countString = count.ToString();
+
+                output.AppendLine(string.Join(",", new String[]{tableName, countString}));
+            }
+            return output;
         }
     }
 }
